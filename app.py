@@ -1,16 +1,40 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# Ruta principal
+# --------------------------
+#   Página principal
+# --------------------------
 @app.route('/')
 def inicio():
-    return "<h1>Bienvenidos a Bolis de Mónica</h1><p>Los mejores bolis de sabores 🍓🍍🍉</p>"
+    return render_template("index.html")
 
-# Ruta dinámica
+
+# --------------------------
+#   Ruta dinámica: Producto
+# --------------------------
 @app.route('/producto/<nombre>')
 def producto(nombre):
-    return f"<h2>Producto solicitado: {nombre}</h2><p>Consulta exitosa en el sistema de Bolis de Mónica.</p>"
+    return render_template("producto.html", nombre=nombre.capitalize())
+
+
+# --------------------------
+#   Ruta dinámica: Usuario
+# --------------------------
+@app.route('/usuario/<nombre>')
+def usuario(nombre):
+    mensaje = f"Bienvenido/a {nombre.capitalize()}, gracias por visitar Bolis de Mónica."
+    return render_template("usuario.html", nombre=nombre.capitalize(), mensaje=mensaje)
+
+
+# --------------------------
+#   Manejo de errores elegante
+# --------------------------
+@app.errorhandler(404)
+def pagina_no_encontrada(e):
+    return render_template("error.html"), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)
+
