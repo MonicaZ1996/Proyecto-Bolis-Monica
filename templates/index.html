@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Bolis de Mónica</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <div class="container">
-        <h1>🍧 Bolis de Mónica</h1>
-        <p class="subtitulo">Sabores únicos, hechos con amor ❤️</p>
+{% block content %}
+<h2>Bienvenidos a Bolis de Mónica</h2>
+<p>Los mejores bolis artesanales de Riobamba. 100% naturales.</p>
 
-        <hr>
+<img src="https://cdn.pixabay.com/photo/2023/06/21/15/16/ice-cream-8082131_1280.png" 
+     alt="Bolis" width="300">
 
-        <h2>Navegación</h2>
-        <ul>
-            <li><a href="/producto/fresa">Ver producto: Fresa</a></li>
-            <li><a href="/producto/pina">Ver producto: Piña</a></li>
-            <li><a href="/usuario/Monica">Iniciar sesión como Mónica</a></li>
-        </ul>
-    </div>
-</body>
-</html>
+{% endblock %}
 

@@ -2,39 +2,49 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# --------------------------
-#   Página principal
-# --------------------------
+# ----------------------------
+# RUTA PRINCIPAL
+# ----------------------------
 @app.route('/')
 def inicio():
-    return render_template("index.html")
+    return render_template('index.html')
 
+# ----------------------------
+# RUTA ACERCA DE
+# ----------------------------
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
-# --------------------------
-#   Ruta dinámica: Producto
-# --------------------------
-@app.route('/producto/<nombre>')
-def producto(nombre):
-    return render_template("producto.html", nombre=nombre.capitalize())
+# ----------------------------
+# RUTA PRODUCTOS
+# ----------------------------
+@app.route('/productos')
+def productos():
+    lista_productos = [
+        {"nombre": "Boli de Fresa", "precio": 0.50},
+        {"nombre": "Boli de Mango", "precio": 0.60},
+        {"nombre": "Boli de Oreo", "precio": 0.90},
+        {"nombre": "Boli de Maracuyá", "precio": 0.70},
+    ]
+    return render_template('productos.html', productos=lista_productos)
 
+# ----------------------------
+# RUTA CLIENTE DINÁMICA
+# ----------------------------
+@app.route('/cliente/<nombre>')
+def cliente(nombre):
+    return render_template('cliente.html', nombre=nombre)
 
-# --------------------------
-#   Ruta dinámica: Usuario
-# --------------------------
-@app.route('/usuario/<nombre>')
-def usuario(nombre):
-    mensaje = f"Bienvenido/a {nombre.capitalize()}, gracias por visitar Bolis de Mónica."
-    return render_template("usuario.html", nombre=nombre.capitalize(), mensaje=mensaje)
+# ----------------------------
+# RUTA FACTURA
+# ----------------------------
+@app.route('/factura/<producto>')
+def factura(producto):
+    return render_template('factura.html', producto=producto)
 
-
-# --------------------------
-#   Manejo de errores elegante
-# --------------------------
-@app.errorhandler(404)
-def pagina_no_encontrada(e):
-    return render_template("error.html"), 404
-
-
+# ----------------------------
+# EJECUCIÓN LOCAL
+# ----------------------------
 if __name__ == '__main__':
     app.run(debug=True)
-

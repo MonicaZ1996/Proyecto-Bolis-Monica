@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Producto - {{ nombre }}</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <div class="container">
-        <h1>Producto: {{ nombre }}</h1>
-        <p>Consulta exitosa en el sistema de Bolis de Mónica.</p>
+{% block content %}
+<h2>Nuestros Productos</h2>
 
-        <a class="boton" href="/">Regresar al inicio</a>
-    </div>
-</body>
-</html>
+<ul>
+    {% for p in productos %}
+        <li>{{ p.nombre }} — ${{ "%.2f"|format(p.precio) }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
