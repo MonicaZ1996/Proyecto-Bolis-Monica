@@ -1,4 +1,4 @@
-lista_productos = [
+lista_producto = [
     {
         "nombre": "Boli de Fresa",
         "descripcion": "Delicioso boli de fresa natural.",
