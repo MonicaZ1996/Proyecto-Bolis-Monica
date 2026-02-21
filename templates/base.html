@@ -2,27 +2,21 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Bolis de Mónica</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Bolis Mónica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 
-<header>
-    <h1>Bolis de Mónica</h1>
-    <nav>
-        <a href="/">Inicio</a>
-        <a href="/productos">Productos</a>
-        <a href="/about">Acerca de</a>
-    </nav>
-</header>
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/productos">Productos</a>
+    <a href="/about">Acerca de</a>
+</nav>
 
-<main>
-    {% block content %}{% endblock %}
-</main>
-
-<footer>
-    <p>© 2026 Bolis de Mónica</p>
-</footer>
+{% block contenido %}
+<!-- Aquí va el contenido de cada página -->
+<img src="{{ url_for('static', filename='img/bolis.jpg') }}" alt="bolis">
+{% endblock %}
 
 </body>
 </html>
