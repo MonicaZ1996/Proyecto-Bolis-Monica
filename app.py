@@ -15,14 +15,13 @@ def inicio():
 @app.route('/productos')
 def productos():
     lista_productos = [
-        {"nombre": "Boli de Fresa", "precio": 1.00},
-        {"nombre": "Boli de Mango", "precio": 1.00},
-        {"nombre": "Boli de Oreo", "precio": 1.50},
-        {"nombre": "Boli de Coco", "precio": 1.00},
-        {"nombre": "Boli de Mora", "precio": 1.00},
+        {"nombre": "Boli de Fresa", "precio": 1.00, "imagen": "fresa.png"},
+        {"nombre": "Boli de Mango", "precio": 1.00, "imagen": "mango.jpg"},
+        {"nombre": "Boli de Oreo", "precio": 1.50, "imagen": "oreo.png"},
+        {"nombre": "Boli de Coco", "precio": 1.00, "imagen": "coco.jpg"},
+        {"nombre": "Boli de Mora", "precio": 1.00, "imagen": "mora.png"},
     ]
     return render_template("productos.html", productos=lista_productos)
-
 # -------------------------
 #   RUTA DINÁMICA
 # -------------------------

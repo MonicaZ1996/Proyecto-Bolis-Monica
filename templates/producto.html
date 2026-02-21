@@ -6,6 +6,7 @@
 <div class="productos-lista">
     {% for item in productos %}
         <div class="card">
+            <img src="{{ url_for('static', filename='img/' + item.imagen) }}" alt="{{ item.nombre }}">
             <h3>{{ item.nombre }}</h3>
             <p>Precio: ${{ item.precio }}</p>
         </div>
