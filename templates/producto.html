@@ -1,12 +1,14 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-<h2>Nuestros Productos</h2>
+<h1>Productos disponibles</h1>
 
-<ul>
-    {% for p in productos %}
-        <li>{{ p.nombre }} — ${{ "%.2f"|format(p.precio) }}</li>
+<div class="productos-lista">
+    {% for item in productos %}
+        <div class="card">
+            <h3>{{ item.nombre }}</h3>
+            <p>Precio: ${{ item.precio }}</p>
+        </div>
     {% endfor %}
-</ul>
-
+</div>
 {% endblock %}
