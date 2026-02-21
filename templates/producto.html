@@ -1,44 +1,24 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos – Bolis de Mónica</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
 
-{% block content %}
-<h1 style="text-align:center; margin-top:20px;">Nuestros Bolis</h1>
+<h1>Nuestros Productos</h1>
 
-<div class="productos-grid">
-
+<div class="productos-container">
+    {% for p in productos %}
     <div class="producto-card">
-        <img src="{{ url_for('static', filename='img/fresa.png') }}" alt="Boli de Fresa">
-        <h3>Boli de Fresa</h3>
-        <p>✔ Sabor natural de fresa</p>
-        <span class="precio">$1.00</span>
+        <img src="{{ p.imagen }}" alt="{{ p.nombre }}">
+        <h3>{{ p.nombre }}</h3>
+        <p>{{ p.descripcion }}</p>
+        <span class="precio">${{ p.precio }}</span>
     </div>
-
-    <div class="producto-card">
-        <img src="{{ url_for('static', filename='img/mango.jpg') }}" alt="Boli de Mango">
-        <h3>Boli de Mango</h3>
-        <p>✔ Hecho con pulpa de mango</p>
-        <span class="precio">$1.00</span>
-    </div>
-
-    <div class="producto-card">
-        <img src="{{ url_for('static', filename='img/mora.png') }}" alt="Boli de Mora">
-        <h3>Boli de Mora</h3>
-        <p>✔ Dulce y refrescante</p>
-        <span class="precio">$1.00</span>
-    </div>
-
-    <div class="producto-card">
-        <img src="{{ url_for('static', filename='img/coco.jpg') }}" alt="Boli de Coco">
-        <h3>Boli de Coco</h3>
-        <p>✔ Cremoso y delicioso</p>
-        <span class="precio">$1.00</span>
-    </div>
-
-    <div class="producto-card">
-        <img src="{{ url_for('static', filename='img/oreo.png') }}" alt="Boli de Oreo">
-        <h3>Boli de Oreo</h3>
-        <p>✔ El favorito de todos</p>
-        <span class="precio">$1.50</span>
-    </div>
-
+    {% endfor %}
 </div>
-{% endblock %}
+
+</body>
+</html>
