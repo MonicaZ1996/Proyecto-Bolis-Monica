@@ -1,15 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Productos disponibles</h1>
+<h1 style="text-align:center; margin-top:20px;">Nuestros Bolis</h1>
 
-<div class="productos-lista">
-    {% for item in productos %}
-        <div class="card">
-            <img src="{{ url_for('static', filename='img/' + item.imagen) }}" alt="{{ item.nombre }}">
-            <h3>{{ item.nombre }}</h3>
-            <p>Precio: ${{ item.precio }}</p>
-        </div>
-    {% endfor %}
+<div class="productos-grid">
+
+    <div class="producto-card">
+        <img src="{{ url_for('static', filename='img/fresa.png') }}" alt="Boli de Fresa">
+        <h3>Boli de Fresa</h3>
+        <p>✔ Sabor natural de fresa</p>
+        <span class="precio">$1.00</span>
+    </div>
+
+    <div class="producto-card">
+        <img src="{{ url_for('static', filename='img/mango.jpg') }}" alt="Boli de Mango">
+        <h3>Boli de Mango</h3>
+        <p>✔ Hecho con pulpa de mango</p>
+        <span class="precio">$1.00</span>
+    </div>
+
+    <div class="producto-card">
+        <img src="{{ url_for('static', filename='img/mora.png') }}" alt="Boli de Mora">
+        <h3>Boli de Mora</h3>
+        <p>✔ Dulce y refrescante</p>
+        <span class="precio">$1.00</span>
+    </div>
+
+    <div class="producto-card">
+        <img src="{{ url_for('static', filename='img/coco.jpg') }}" alt="Boli de Coco">
+        <h3>Boli de Coco</h3>
+        <p>✔ Cremoso y delicioso</p>
+        <span class="precio">$1.00</span>
+    </div>
+
+    <div class="producto-card">
+        <img src="{{ url_for('static', filename='img/oreo.png') }}" alt="Boli de Oreo">
+        <h3>Boli de Oreo</h3>
+        <p>✔ El favorito de todos</p>
+        <span class="precio">$1.50</span>
+    </div>
+
 </div>
 {% endblock %}
