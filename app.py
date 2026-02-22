@@ -20,7 +20,7 @@ lista_productos = [
         "nombre": "Boli de Coco",
         "descripcion": "Boli hecho con coco fresco.",
         "precio": 1.00,
-        "imagen": "/static/img/sandia.jpg"
+        "imagen": "/static/img/coco.jpg"
     },
     {
         "nombre": "Boli de Mora",
@@ -30,9 +30,9 @@ lista_productos = [
     },
     {
         "nombre": "Boli de Oreo",
-        "descripcion": "Boli hecho con galletas Oreo.",
+        "descripcion": "Boli hecho con galletas oreo.",
         "precio": 1.00,
-        "imagen": "/static/img/sandia.jpg"
+        "imagen": "/static/img/oreo.jpg"
     }
 ]
 
