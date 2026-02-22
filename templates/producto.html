@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Productos – Bolis de Mónica</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>Nuestros Productos</h1>
+{% block content %}
+<h1 style="text-align:center; color:#ff1a75;">Nuestros Productos</h1>
 
-<div class="productos-container">
+<div class="container">
+
     {% for p in productos %}
-    <div class="producto-card">
+    <div class="card">
         <img src="{{ p.imagen }}" alt="{{ p.nombre }}">
-        <h3>{{ p.nombre }}</h3>
-        <p>{{ p.descripcion }}</p>
-        <span class="precio">${{ p.precio }}</span>
+        <div class="info">
+            <div class="nombre">{{ p.nombre }}</div>
+            <div class="descripcion">{{ p.descripcion }}</div>
+            <div class="precio">$ {{ p.precio }}</div>
+
+            <a class="btn-comprar" href="#">Comprar</a>
+        </div>
     </div>
     {% endfor %}
-</div>
 
-</body>
-</html>
+</div>
+{% endblock %}

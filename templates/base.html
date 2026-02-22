@@ -2,21 +2,88 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Bolis Mónica</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolis de Mónica</title>
+
+    <!-- Estilos generales -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff0f5;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #ff1a75;
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffe6f0;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        /* CONTENIDO */
+        .content {
+            padding: 30px;
+            min-height: 70vh;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #ff1a75;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+    </style>
 </head>
+
 <body>
 
-<nav>
-    <a href="/">Inicio</a>
-    <a href="/productos">Productos</a>
-    <a href="/about">Acerca de</a>
-</nav>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">🍧 Bolis de Mónica</div>
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/productos">Productos</a>
+            <a href="/nosotros">Nosotros</a>
+            <a href="/contacto">Contacto</a>
+        </nav>
+    </header>
 
-{% block contenido %}
-<!-- Aquí va el contenido de cada página -->
-<img src="{{ url_for('static', filename='img/bolis.jpg') }}" alt="bolis">
-{% endblock %}
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Bolis de Mónica. Todos los derechos reservados.</p>
+        <p>Hecho con ❤️ en Riobamba, Ecuador.</p>
+    </footer>
 
 </body>
 </html>
