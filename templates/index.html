@@ -1,11 +1,182 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolis de Mónica</title>
 
-{% block content %}
-<h2>Bienvenidos a Bolis de Mónica</h2>
-<p>Los mejores bolis artesanales de Riobamba. 100% naturales.</p>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fff0f7;
+            margin: 0;
+            padding: 0;
+        }
 
-<img src="https://cdn.pixabay.com/photo/2023/06/21/15/16/ice-cream-8082131_1280.png" 
-     alt="Bolis" width="300">
+        /* ---------------------- NAVBAR ---------------------- */
+        nav {
+            background: #ff4d94;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
 
-{% endblock %}
+        nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 17px;
+            transition: 0.2s;
+        }
 
+        nav a:hover {
+            color: #ffe6f0;
+        }
+
+        /* ---------------------- BANNER ---------------------- */
+        .banner {
+            width: 100%;
+            height: 260px;
+            background: url("/static/img/banner.jpg") center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            font-size: 38px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* ---------------------- PRODUCTOS ---------------------- */
+        .container {
+            padding: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        }
+
+        .card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .nombre {
+            font-size: 20px;
+            color: #ff1a75;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .descripcion {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+            min-height: 40px;
+        }
+
+        .precio {
+            font-size: 18px;
+            color: #009933;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        /* ---------------------- BOTÓN ---------------------- */
+        .btn-comprar {
+            background: #ff4d94;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.2s;
+            font-size: 15px;
+        }
+
+        .btn-comprar:hover {
+            background: #ff1a75;
+        }
+
+        /* ---------------------- FOOTER ---------------------- */
+        footer {
+            background: #ff4d94;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div>Bolis de Mónica</div>
+        <div>
+            <a href="/">Inicio</a>
+            <a href="/productos">Productos</a>
+            <a href="/nosotros">Nosotros</a>
+            <a href="/contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- BANNER PRINCIPAL -->
+    <div class="banner">
+        ¡El sabor más frío y delicioso!
+    </div>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div class="container">
+
+        {% for p in productos %}
+        <div class="card">
+            <img src="{{ p.imagen }}" alt="{{ p.nombre }}">
+            <div class="info">
+                <div class="nombre">{{ p.nombre }}</div>
+                <div class="descripcion">{{ p.descripcion }}</div>
+                <div class="precio">$ {{ p.precio }}</div>
+
+                <a class="btn-comprar" href="#">Comprar</a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 Bolis de Mónica — Todos los derechos reservados 🍧
+    </footer>
+
+</body>
+</html>
