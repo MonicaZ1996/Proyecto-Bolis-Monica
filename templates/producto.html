@@ -1,22 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 style="text-align:center; color:#ff1a75;">Nuestros Productos</h1>
+<h2>Productos</h2>
 
-<div class="container">
+<ul>
+    <li>Bolis de Coco</li>
+    <li>Bolis de Oreo</li>
+    <li>Bolis de Mango</li>
+    <li>Bolis de Fresa</li>
+    <li>Bolis de Mora</li>
+</ul>
 
-    {% for p in producto %}
-    <div class="card">
-        <img src="{{ p.imagen }}" alt="{{ p.nombre }}">
-        <div class="info">
-            <div class="nombre">{{ p.nombre }}</div>
-            <div class="descripcion">{{ p.descripcion }}</div>
-            <div class="precio">$ {{ p.precio }}</div>
-
-            <a class="btn-comprar" href="#">Comprar</a>
-        </div>
-    </div>
-    {% endfor %}
-
-</div>
 {% endblock %}

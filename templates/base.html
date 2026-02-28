@@ -2,88 +2,29 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bolis de Mónica</title>
-
-    <!-- Estilos generales -->
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #fff0f5;
-        }
-
-        /* NAVBAR */
-        .navbar {
-            background: #ff1a75;
-            padding: 15px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .navbar a:hover {
-            color: #ffe6f0;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-        }
-
-        /* CONTENIDO */
-        .content {
-            padding: 30px;
-            min-height: 70vh;
-        }
-
-        /* FOOTER */
-        footer {
-            background: #ff1a75;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 40px;
-        }
-
-        footer p {
-            margin: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
-
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="logo">🍧 Bolis de Mónica</div>
-        <nav>
-            <a href="/">Inicio</a>
-            <a href="/productos">Productos</a>
-            <a href="/nosotros">Nosotros</a>
-            <a href="/contacto">Contacto</a>
-        </nav>
-    </header>
+<header>
+    <h1>🍧 Heladería Bolis de Mónica</h1>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/productos">Productos</a>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/contacto">Contacto</a>
+        <a href="/inventario">Inventario</a>
+    </nav>
+</header>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="content">
-        {% block content %}{% endblock %}
-    </main>
+<section class="contenido">
+    {% block content %}{% endblock %}
+</section>
 
-    <!-- FOOTER -->
-    <footer>
-        <p>© 2026 Bolis de Mónica. Todos los derechos reservados.</p>
-        <p>Hecho con ❤️ en Riobamba, Ecuador.</p>
-    </footer>
+<footer>
+    <p>© 2026 Bolis de Mónica – Todos los derechos reservados</p>
+</footer>
 
 </body>
 </html>
