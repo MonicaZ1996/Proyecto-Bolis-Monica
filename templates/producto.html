@@ -1,14 +1,55 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Productos</title>
+</head>
+<body>
 
-{% block content %}
-<h2>Productos</h2>
+<header>
+    <h1>🍧 Productos</h1>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="inventario.html">Inventario</a>
+    </nav>
+</header>
 
-<ul>
-    <li>Bolis de Coco</li>
-    <li>Bolis de Oreo</li>
-    <li>Bolis de Mango</li>
-    <li>Bolis de Fresa</li>
-    <li>Bolis de Mora</li>
-</ul>
+<section class="grid">
 
-{% endblock %}
+    <div class="card">
+        <img src="img/coco.jpg">
+        <h3>Boli de Coco</h3>
+        <p>Precio: $1.00</p>
+    </div>
+
+    <div class="card">
+        <img src="img/fresa.jpg">
+        <h3>Boli de Fresa</h3>
+        <p>Precio: $1.00</p>
+    </div>
+
+    <div class="card">
+        <img src="img/oreo.jpg">
+        <h3>Boli de Oreo</h3>
+        <p>Precio: $1.50</p>
+    </div>
+
+    <div class="card">
+        <img src="img/mango.jpg">
+        <h3>Boli de Mango</h3>
+        <p>Precio: $1.00</p>
+    </div>
+
+    <div class="card">
+        <img src="img/frutos.jpg">
+        <h3>Boli de Frutos Rojos</h3>
+        <p>Precio: $1.25</p>
+    </div>
+
+</section>
+
+</body>
+</html>

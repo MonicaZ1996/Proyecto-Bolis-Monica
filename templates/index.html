@@ -1,13 +1,63 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Bolis de Mónica</title>
+</head>
+<body>
 
-{% block content %}
-<h2>Bienvenido a la Heladería “Bolis de Mónica”</h2>
-<img src="/static/img/bolis.jpg" class="img-bolis">
-<p>Los mejores bolis artesanales de Ambato.</p>
+<header>
+    <h1>🍧 Heladería Bolis de Mónica</h1>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="inventario.html">Inventario</a>
+    </nav>
+</header>
 
-<img src="/static/img/coco.jpg" class="img-coco">
-<img src="/static/img/oreo.jpg" class="img-oreo">
-<img src="/static/img/fresa.jpg" class="img-fresa">
-<img src="/static/img/mango.jpg" class="img-mango">
-<img src="/static/img/mora.jpg" class="img-mora">
-{% endblock %}
+<section class="banner">
+    <h2>Bienvenido a los mejores bolis artesanales de Ambato</h2>
+</section>
+
+<section class="precios">
+    <h2>💲 Precios de nuestros bolis</h2>
+
+    <div class="grid">
+        <div class="card">
+            <img src="img/coco.jpg">
+            <h3>Boli de Coco</h3>
+            <p>$1.00</p>
+        </div>
+
+        <div class="card">
+            <img src="img/fresa.jpg">
+            <h3>Boli de Fresa</h3>
+            <p>$1.00</p>
+        </div>
+
+        <div class="card">
+            <img src="img/oreo.jpg">
+            <h3>Boli de Oreo</h3>
+            <p>$1.50</p>
+        </div>
+
+        <div class="card">
+            <img src="img/mango.jpg">
+            <h3>Boli de Mango</h3>
+            <p>$1.00</p>
+        </div>
+
+        <div class="card">
+            <img src="img/frutos.jpg">
+            <h3>Boli de Frutos Rojos</h3>
+            <p>$1.25</p>
+        </div>
+    </div>
+</section>
+
+<footer>© 2026 Bolis de Mónica – Todos los derechos reservados</footer>
+
+</body>
+</html>
