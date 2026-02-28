@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: proyecto-bolis-monica
+    env: node
+    startCommand: node server.js
+    buildCommand: npm install
