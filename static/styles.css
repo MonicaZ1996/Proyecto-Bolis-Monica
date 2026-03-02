@@ -2,12 +2,12 @@ body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
-    background: #fff8f8;
+    background: #bce24b;
 }
 
 /* HEADER */
 .header {
-    background: #ffb6c8;
+    background: #e9466f;
     color: #333;
     padding: 20px;
     text-align: center;
@@ -49,7 +49,7 @@ body {
 
 /* TARJETAS */
 .card {
-    background: white;
+    background: rgb(232, 108, 211);
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     padding-bottom: 20px;
