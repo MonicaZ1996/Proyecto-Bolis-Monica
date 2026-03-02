@@ -7,4 +7,4 @@ class Producto(db.Model):
     cantidad = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return f"<Producto {self.nombre}>"
+        return f"<Producto.py {self.nombre}>"
