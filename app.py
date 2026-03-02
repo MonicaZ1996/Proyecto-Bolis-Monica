@@ -30,10 +30,10 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/productos")
+@app.route("/producto")
 def productos():
-    productos_lista = Producto.query.all()
-    return render_template("productos.html", productos=productos_lista)
+    producto_lista = Producto.query.all()
+    return render_template("producto.html", producto=producto_lista)
 
 
 @app.route("/agregar", methods=["GET", "POST"])
@@ -56,9 +56,9 @@ def agregar():
     return render_template("producto_form.html")
 
 
-@app.route("/contactos")
-def contactos():
-    return render_template("contactos.html")
+@app.route("/contacto")
+def contacto():
+    return render_template("contacto.html")
 
 
 @app.route("/datos")
