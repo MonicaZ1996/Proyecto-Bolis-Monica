@@ -2,30 +2,22 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Bolis de Mónica</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Heladería Mónica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-<header>
-    <h1>🍧 Heladería Bolis de Mónica</h1>
-    <nav>
-        <a href="/">Inicio</a>
-        <a href="/productos">Productos</a>
-        <a href="/nosotros">Nosotros</a>
-        <a href="/contacto">Contacto</a>
-        <a href="/inventario">Inventario</a>
-    </nav>
-</header>
+<nav class="navbar">
+    <a href="/">Inicio</a>
+    <a href="/productos">Productos</a>
+    <a href="/agregar">Agregar</a>
+    <a href="/contactos">Contacto</a>
+    <a href="/datos">Datos</a>
+</nav>
 
-<section class="contenido">
+<div class="container">
     {% block content %}{% endblock %}
-    
-</section>
-
-<footer>
-    <p>© 2026 Bolis de Mónica – Todos los derechos reservados</p>
-</footer>
+</div>
 
 </body>
 </html>

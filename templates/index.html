@@ -1,63 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Bolis de Mónica</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<header>
-    <h1>🍧 Heladería Bolis de Mónica</h1>
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
-        <a href="nosotros.html">Nosotros</a>
-        <a href="inventario.html">Inventario</a>
-    </nav>
-</header>
+{% block content %}
+<h1 class="titulo">Bienvenidos a Heladería Mónica 🍧</h1>
 
-<section class="banner">
-    <h2>Bienvenido a los mejores bolis artesanales de Riobamba</h2>
-</section>
-
-<section class="precios">
-    <h2>💲 Precios de nuestros bolis</h2>
-
-    <div class="grid">
-        <div class="static">
-            <img src="img/coco.jpg">
-            <h3>Boli de Coco</h3>
-            <p>$1.00</p>
-        </div>
-
-        <div class="static">
-            <img src="img/fresa.jpg">
-            <h3>Boli de Fresa</h3>
-            <p>$1.00</p>
-        </div>
-
-        <div class="static">
-            <img src="img/oreo.jpg">
-            <h3>Boli de Oreo</h3>
-            <p>$1.50</p>
-        </div>
-
-        <div class="static">
-            <img src="img/mango.jpg">
-            <h3>Boli de Mango</h3>
-            <p>$1.00</p>
-        </div>
-
-        <div class="static">
-            <img src="img/mora.jpg">
-            <h3>Boli de Mora Roja</h3>
-            <p>$1.25</p>
-        </div>
+<div class="cards">
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/coco.png') }}">
+        <h3>Boli de Coco</h3>
+        <p>Precio: $0.50</p>
     </div>
-</section>
 
-<footer>© 2026 Bolis de Mónica – Todos los derechos reservados</footer>
-
-</body>
-</html>
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/oreo.png') }}">
+        <h3>Boli de Oreo</h3>
+        <p>Precio: $0.75</p>
+    </div>
+</div>
+{% endblock %}
