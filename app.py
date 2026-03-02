@@ -2,31 +2,39 @@ from flask import Flask, render_template, request, redirect, url_for
 from inventario.bd import db
 from inventario.productos import Producto
 from inventario.inventario import Inventario
-import json
-import csv
 import os
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///inventario.db"
+
+# -------- CONFIGURACIÓN SQLITE COMPATIBLE CON RENDER --------
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+db_path = os.path.join(BASE_DIR, "inventario.db")
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
 
-# Crear base de datos si no existe
+# Crear base de datos en tiempo de ejecución (NO en build)
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()
+    except Exception as e:
+        print("Error creando base de datos:", e)
 
-# OBJETO INVENTARIO
+# -------- OBJETO INVENTARIO --------
 inventario = Inventario()
+
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+
 @app.route("/productos")
 def productos():
     productos_lista = Producto.query.all()
     return render_template("productos.html", productos=productos_lista)
+
 
 @app.route("/agregar", methods=["GET", "POST"])
 def agregar():
@@ -47,9 +55,11 @@ def agregar():
 
     return render_template("producto_form.html")
 
+
 @app.route("/contactos")
 def contactos():
     return render_template("contactos.html")
+
 
 @app.route("/datos")
 def datos():
@@ -59,5 +69,7 @@ def datos():
 
     return render_template("datos.html", txt=txt, json=json_datos, csv=csv_datos)
 
+
+# -------- NO EJECUTAR DEBUG EN RENDER --------
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
