@@ -1,42 +1,80 @@
 body {
-    background: #ffe4f2;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fff8f8;
 }
 
-.navbar {
-    background: #ff8ac4;
-    padding: 15px;
+/* HEADER */
+.header {
+    background: #ffb6c8;
+    color: #333;
+    padding: 20px;
     text-align: center;
 }
 
-.navbar a {
-    color: white;
+.header h1 {
+    margin: 0;
+    font-size: 2.3rem;
+}
+
+/* MENÚ */
+.menu {
+    margin-top: 10px;
+}
+
+.menu a {
     margin: 0 15px;
-    font-size: 18px;
+    text-decoration: none;
+    color: #444;
+    font-weight: bold;
+    padding: 8px 15px;
+    background: #ffe0eb;
+    border-radius: 10px;
+    transition: .2s;
 }
 
-.container {
-    padding: 30px;
+.menu a:hover {
+    background: #ffd2df;
+    transform: scale(1.05);
 }
 
-.titulo {
-    text-align: center;
+/* GRID DE PRODUCTOS */
+.productos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 40px;
 }
 
-.cards {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
+/* TARJETAS */
 .card {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 200px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding-bottom: 20px;
     text-align: center;
+    overflow: hidden;
+    transition: .25s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
 .card img {
     width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin: 15px 0 5px;
+}
+
+.precio {
+    font-size: 1.1rem;
+    color: #d63384;
+    font-weight: bold;
 }

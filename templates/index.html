@@ -1,19 +1,64 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Heladería Mónica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
 
-{% block content %}
-<h1 class="titulo">Bienvenidos a Heladería Mónica 🍧</h1>
+<body>
 
-<div class="cards">
+<header class="header">
+    <h1>🍨 Bienvenidos a Heladería Mónica 🍧</h1>
+
+    <nav class="menu">
+        <a href="/">Inicio</a>
+        <a href="/productos">Productos</a>
+        <a href="/agregar">Agregar</a>
+        <a href="/contacto">Contacto</a>
+        <a href="/datos">Datos</a>
+    </nav>
+</header>
+
+<section class="productos-container">
+
+    <!-- Boli Fresa -->
     <div class="card">
-        <img src="{{ url_for('static', filename='img/coco.jpg') }}">
-        <h3>Boli de Coco</h3>
-        <p>Precio: $0.50</p>
+        <img src="{{ url_for('static', filename='img/boli_fresa.jpg') }}" alt="Boli de Fresa">
+        <h3>Boli de Fresa</h3>
+        <p class="precio">$0.50</p>
     </div>
 
+    <!-- Boli Mango-->
     <div class="card">
-        <img src="{{ url_for('static', filename='img/oreo.jpg') }}">
+        <img src="{{ url_for('static', filename='img/mango.jpg') }}" alt="Boli de mango">
+        <h3>Boli de Mango</h3>
+        <p class="precio">$0.50</p>
+    </div>
+
+    <!-- Boli Oreo -->
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/oreo.jpg') }}" alt="Boli de oreo">
         <h3>Boli de Oreo</h3>
-        <p>Precio: $0.75</p>
+        <p class="precio">$0.50</p>
     </div>
-</div>
-{% endblock %}
+
+    
+    <!-- Boli Mora -->
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/mora.jpg') }}" alt="Boli de mora">
+        <h3>Boli de Mora</h3>
+        <p class="precio">$0.50</p>
+    </div>
+
+    <!-- Boli Coco -->
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/coco.jpg') }}" alt="Boli de coco">
+        <h3>Boli de Mora</h3>
+        <p class="precio">$0.50</p>
+    </div>
+
+</section>
+
+</body>
+</html>
