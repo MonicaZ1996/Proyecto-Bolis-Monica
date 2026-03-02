@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from inventario.bd import db
-from inventario.productos import Producto
+from inventario.producto import Producto
 from inventario.inventario import Inventario
 import os
 
