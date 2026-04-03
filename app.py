@@ -1,23 +1,30 @@
 from flask import Flask, render_template, request, redirect, send_file
 from conexion.conexion import get_connection
-from reportlab.pdfgen import canvas
+
+# PDF bonito
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+
+# WORD
+from docx import Document
 
 app = Flask(__name__)
 
-# INICIO
+# ================= INICIO =================
 @app.route("/")
 def inicio():
     return render_template("index.html")
 
-# ================= PRODUCTOS =================
 
-@app.route("/producto")
-def producto():
+# ================= PRODUCTOS =================
+@app.route("/productos")
+def productos():
     try:
         conn = get_connection()
         cursor = conn.cursor(dictionary=True)
 
-        cursor.execute("SELECT * FROM producto")
+        cursor.execute("SELECT * FROM productos")
         datos = cursor.fetchall()
 
         conn.close()
@@ -25,10 +32,11 @@ def producto():
         print("Error:", e)
         datos = []
 
-    return render_template("producto/lista.html", producto=datos)
+    return render_template("productos/lista.html", productos=datos)
 
-# CREAR
-@app.route("/producto/crear", methods=["GET", "POST"])
+
+# ================= CREAR =================
+@app.route("/productos/crear", methods=["GET", "POST"])
 def crear():
     if request.method == "POST":
         try:
@@ -40,7 +48,7 @@ def crear():
             cursor = conn.cursor()
 
             cursor.execute(
-                "INSERT INTO producto (nombre, precio, stock) VALUES (%s,%s,%s)",
+                "INSERT INTO productos (nombre, precio, stock) VALUES (%s,%s,%s)",
                 (nombre, precio, stock)
             )
 
@@ -49,12 +57,13 @@ def crear():
         except Exception as e:
             print("Error:", e)
 
-        return redirect("/producto")
+        return redirect("/productos")
 
-    return render_template("producto/crear.html")
+    return render_template("productos/crear.html")
 
-# EDITAR
-@app.route("/producto/editar/<int:id>", methods=["GET", "POST"])
+
+# ================= EDITAR =================
+@app.route("/productos/editar/<int:id>", methods=["GET", "POST"])
 def editar(id):
     try:
         conn = get_connection()
@@ -85,7 +94,8 @@ def editar(id):
 
     return render_template("productos/editar.html", producto=producto)
 
-# ELIMINAR
+
+# ================= ELIMINAR =================
 @app.route("/productos/eliminar/<int:id>")
 def eliminar(id):
     try:
@@ -101,43 +111,79 @@ def eliminar(id):
 
     return redirect("/productos")
 
-# ================= NUEVAS PÁGINAS =================
 
+# ================= CONTACTO =================
 @app.route("/contacto")
 def contacto():
     return render_template("contacto.html")
 
+
+# ================= DATOS =================
 @app.route("/datos")
 def datos():
     return render_template("datos.html")
 
-# ================= PDF =================
 
+# ================= PDF =================
 @app.route("/reporte")
 def reporte():
     archivo = "reporte.pdf"
-    c = canvas.Canvas(archivo)
+    doc = SimpleDocTemplate(archivo)
 
-    c.drawString(100, 800, "Reporte de Productos")
+    elementos = []
+    estilos = getSampleStyleSheet()
+
+    elementos.append(Paragraph("Informe de Productos - Bolis", estilos["Title"]))
 
     try:
         conn = get_connection()
         cursor = conn.cursor()
-
         cursor.execute("SELECT nombre, precio, stock FROM productos")
         datos = cursor.fetchall()
-
-        y = 750
-        for p in datos:
-            c.drawString(100, y, f"{p[0]} - ${p[1]} - Stock: {p[2]}")
-            y -= 20
-
         conn.close()
-    except Exception as e:
-        print("Error:", e)
+    except:
+        datos = []
 
-    c.save()
+    data = [["Nombre", "Precio", "Stock"]]
+    for p in datos:
+        data.append([p[0], str(p[1]), str(p[2])])
+
+    tabla = Table(data)
+    tabla.setStyle(TableStyle([
+        ("BACKGROUND", (0,0), (-1,0), colors.pink),
+        ("GRID", (0,0), (-1,-1), 1, colors.black)
+    ]))
+
+    elementos.append(tabla)
+    doc.build(elementos)
+
     return send_file(archivo, as_attachment=True)
 
+
+# ================= WORD =================
+@app.route("/reporte_word")
+def reporte_word():
+    doc = Document()
+    doc.add_heading("Informe de Productos - Bolis", 0)
+
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT nombre, precio, stock FROM productos")
+        datos = cursor.fetchall()
+        conn.close()
+    except:
+        datos = []
+
+    for p in datos:
+        doc.add_paragraph(f"Nombre: {p[0]} | Precio: {p[1]} | Stock: {p[2]}")
+
+    archivo = "reporte.docx"
+    doc.save(archivo)
+
+    return send_file(archivo, as_attachment=True)
+
+
+# ================= RUN =================
 if __name__ == "__main__":
     app.run(debug=True)
