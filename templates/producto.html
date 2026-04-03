@@ -1,21 +1,26 @@
-{% extends "base.html" %}
+<h2>Lista de Productos</h2>
 
-{% block content %}
-<h1>Productos Registrados</h1>
+<a href="/productos/crear">➕ Nuevo Producto</a>
 
-<table>
+<table border="1">
     <tr>
-        <th>ID</th><th>Nombre</th><th>Precio</th><th>Cantidad</th>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Acciones</th>
     </tr>
 
     {% for p in productos %}
     <tr>
-        <td>{{ p.id }}</td>
+        <td>{{ p.id_producto }}</td>
         <td>{{ p.nombre }}</td>
-        <td>${{ p.precio }}</td>
-        <td>{{ p.cantidad }}</td>
+        <td>{{ p.precio }}</td>
+        <td>{{ p.stock }}</td>
+        <td>
+            <a href="/productos/editar/{{ p.id_producto }}">Editar</a>
+            <a href="/productos/eliminar/{{ p.id_producto }}">Eliminar</a>
+        </td>
     </tr>
     {% endfor %}
 </table>
-
-{% endblock %}
