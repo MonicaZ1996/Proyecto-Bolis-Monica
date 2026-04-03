@@ -1,75 +1,113 @@
-from flask import Flask, render_template, request, redirect, url_for
-from inventario.bd import db
-from inventario.producto import Producto
-from inventario.inventario import Inventario
-import os
+from flask import Flask, render_template, request, redirect, send_file
+from conexion.conexion import get_connection
+from reportlab.pdfgen import canvas
 
 app = Flask(__name__)
 
-# -------- CONFIGURACIÓN SQLITE COMPATIBLE CON RENDER --------
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-db_path = os.path.join(BASE_DIR, "inventario.db")
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-db.init_app(app)
-
-# Crear base de datos en tiempo de ejecución (NO en build)
-with app.app_context():
-    try:
-        db.create_all()
-    except Exception as e:
-        print("Error creando base de datos:", e)
-
-# -------- OBJETO INVENTARIO --------
-inventario = Inventario()
-
-
+# INICIO
 @app.route("/")
-def index():
+def inicio():
     return render_template("index.html")
 
-
-@app.route("/producto")
+# LISTAR PRODUCTOS
+@app.route("/productos")
 def productos():
-    producto_lista = Producto.query.all()
-    return render_template("producto.html", producto=producto_lista)
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
 
+    cursor.execute("SELECT * FROM productos")
+    datos = cursor.fetchall()
 
-@app.route("/agregar", methods=["GET", "POST"])
-def agregar():
+    conn.close()
+    return render_template("productos/lista.html", productos=datos)
+
+# CREAR
+@app.route("/productos/crear", methods=["GET", "POST"])
+def crear():
     if request.method == "POST":
         nombre = request.form["nombre"]
         precio = request.form["precio"]
-        cantidad = request.form["cantidad"]
+        stock = request.form["stock"]
 
-        nuevo = Producto(nombre=nombre, precio=precio, cantidad=cantidad)
-        db.session.add(nuevo)
-        db.session.commit()
+        conn = get_connection()
+        cursor = conn.cursor()
 
-        inventario.guardar_txt(nombre, precio, cantidad)
-        inventario.guardar_json(nombre, precio, cantidad)
-        inventario.guardar_csv(nombre, precio, cantidad)
+        cursor.execute(
+            "INSERT INTO productos (nombre, precio, stock) VALUES (%s,%s,%s)",
+            (nombre, precio, stock)
+        )
 
-        return redirect(url_for("productos"))
+        conn.commit()
+        conn.close()
 
-    return render_template("producto_form.html")
+        return redirect("/productos")
 
+    return render_template("productos/crear.html")
 
-@app.route("/contacto")
-def contacto():
-    return render_template("contacto.html")
+# EDITAR
+@app.route("/productos/editar/<int:id>", methods=["GET", "POST"])
+def editar(id):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
 
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        precio = request.form["precio"]
+        stock = request.form["stock"]
 
-@app.route("/datos")
-def datos():
-    txt = inventario.leer_txt()
-    json_datos = inventario.leer_json()
-    csv_datos = inventario.leer_csv()
+        cursor.execute(
+            "UPDATE productos SET nombre=%s, precio=%s, stock=%s WHERE id_producto=%s",
+            (nombre, precio, stock, id)
+        )
 
-    return render_template("datos.html", txt=txt, json=json_datos, csv=csv_datos)
+        conn.commit()
+        conn.close()
 
+        return redirect("/productos")
 
-# -------- NO EJECUTAR DEBUG EN RENDER --------
+    cursor.execute("SELECT * FROM productos WHERE id_producto=%s", (id,))
+    producto = cursor.fetchone()
+
+    conn.close()
+
+    return render_template("productos/editar.html", producto=producto)
+
+# ELIMINAR
+@app.route("/productos/eliminar/<int:id>")
+def eliminar(id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM productos WHERE id_producto=%s", (id,))
+    conn.commit()
+
+    conn.close()
+
+    return redirect("/productos")
+
+# PDF
+@app.route("/reporte")
+def reporte():
+    archivo = "reporte.pdf"
+    c = canvas.Canvas(archivo)
+
+    c.drawString(100, 800, "Reporte de Productos")
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT nombre, precio, stock FROM productos")
+    datos = cursor.fetchall()
+
+    y = 750
+    for p in datos:
+        c.drawString(100, y, f"{p[0]} - ${p[1]} - Stock: {p[2]}")
+        y -= 20
+
+    conn.close()
+    c.save()
+
+    return send_file(archivo, as_attachment=True)
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

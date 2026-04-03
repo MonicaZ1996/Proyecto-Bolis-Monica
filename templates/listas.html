@@ -1,0 +1,26 @@
+<h2>Productos</h2>
+
+<a href="/productos/crear">Agregar</a>
+
+<table border="1">
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Precio</th>
+<th>Stock</th>
+<th>Acciones</th>
+</tr>
+
+{% for p in productos %}
+<tr>
+<td>{{p.id_producto}}</td>
+<td>{{p.nombre}}</td>
+<td>{{p.precio}}</td>
+<td>{{p.stock}}</td>
+<td>
+<a href="/productos/editar/{{p.id_producto}}">Editar</a>
+<a href="/productos/eliminar/{{p.id_producto}}">Eliminar</a>
+</td>
+</tr>
+{% endfor %}
+</table>
