@@ -179,18 +179,6 @@ def reporte_word():
 if __name__ == "__main__":
     app.run(debug=True)
 
-# listar productos
-@app.route("/producto")
-def producto():
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-
-    cursor.execute("SELECT * FROM productos")
-    datos = cursor.fetchall()
-
-    conn.close()
-
-    return render_template("producto.html", producto=datos)
 
 # producto
 @app.route("/producto/crear", methods=["GET", "POST"])
