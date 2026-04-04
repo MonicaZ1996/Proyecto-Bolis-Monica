@@ -1,17 +1,11 @@
 #conexion a mysql
 import mysql.connector
-from mysql.connector import Error 
+
 def get_connection():
-   try: 
-     
-      connection = mysql.connector.connect(
+    return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="Mmzm1996",
-        database="bolis_db"
+        password="Mmzm1996",   # ← pon tu contraseña si tienes
+        database="bolis_db",
+        port=3305      # ← según tu DBeaver (en tu imagen es 3305)
     )
-      if connection.is_connected():
-       return connection
-   except Error as e:
-     print( f"error al conectar a MySQL:{e}") 
-     return None

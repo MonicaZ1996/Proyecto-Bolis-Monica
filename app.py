@@ -178,3 +178,39 @@ def reporte_word():
 # ================= RUN =================
 if __name__ == "__main__":
     app.run(debug=True)
+
+# listar productos
+@app.route("/producto")
+def producto():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM productos")
+    datos = cursor.fetchall()
+
+    conn.close()
+
+    return render_template("producto.html", producto=datos)
+
+# insertar producto
+@app.route("/producto/crear", methods=["GET", "POST"])
+def crear_producto():
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        precio = request.form["precio"]
+        stock = request.form["stock"]
+
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "INSERT INTO productos (nombre, precio, stock) VALUES (%s,%s,%s)",
+            (nombre, precio, stock)
+        )
+
+        conn.commit()
+        conn.close()
+
+        return redirect("/producto")
+
+    return render_template("crear.html")
