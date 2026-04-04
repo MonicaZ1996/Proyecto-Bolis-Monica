@@ -18,13 +18,13 @@ def inicio():
 
 
 # ================= PRODUCTOS =================
-@app.route("/productos")
-def productos():
+@app.route("/producto")
+def producto():
     try:
         conn = get_connection()
         cursor = conn.cursor(dictionary=True)
 
-        cursor.execute("SELECT * FROM productos")
+        cursor.execute("SELECT * FROM producto")
         datos = cursor.fetchall()
 
         conn.close()
@@ -32,11 +32,11 @@ def productos():
         print("Error:", e)
         datos = []
 
-    return render_template("productos/lista.html", productos=datos)
+    return render_template("producto/lista.html", producto=datos)
 
 
 # ================= CREAR =================
-@app.route("/productos/crear", methods=["GET", "POST"])
+@app.route("/producto/crear", methods=["GET", "POST"])
 def crear():
     if request.method == "POST":
         try:
@@ -48,7 +48,7 @@ def crear():
             cursor = conn.cursor()
 
             cursor.execute(
-                "INSERT INTO productos (nombre, precio, stock) VALUES (%s,%s,%s)",
+                "INSERT INTO producto (nombre, precio, stock) VALUES (%s,%s,%s)",
                 (nombre, precio, stock)
             )
 
@@ -57,13 +57,13 @@ def crear():
         except Exception as e:
             print("Error:", e)
 
-        return redirect("/productos")
+        return redirect("/producto")
 
-    return render_template("productos/crear.html")
+    return render_template("producto/crear.html")
 
 
 # ================= EDITAR =================
-@app.route("/productos/editar/<int:id>", methods=["GET", "POST"])
+@app.route("/producto/editar/<int:id>", methods=["GET", "POST"])
 def editar(id):
     try:
         conn = get_connection()
@@ -75,15 +75,15 @@ def editar(id):
             stock = request.form["stock"]
 
             cursor.execute(
-                "UPDATE productos SET nombre=%s, precio=%s, stock=%s WHERE id_producto=%s",
+                "UPDATE producto SET nombre=%s, precio=%s, stock=%s WHERE id_producto=%s",
                 (nombre, precio, stock, id)
             )
 
             conn.commit()
             conn.close()
-            return redirect("/productos")
+            return redirect("/producto")
 
-        cursor.execute("SELECT * FROM productos WHERE id_producto=%s", (id,))
+        cursor.execute("SELECT * FROM producto WHERE id_producto=%s", (id,))
         producto = cursor.fetchone()
 
         conn.close()
@@ -92,24 +92,24 @@ def editar(id):
         print("Error:", e)
         producto = None
 
-    return render_template("productos/editar.html", producto=producto)
+    return render_template("producto/editar.html", producto=producto)
 
 
 # ================= ELIMINAR =================
-@app.route("/productos/eliminar/<int:id>")
+@app.route("/producto/eliminar/<int:id>")
 def eliminar(id):
     try:
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute("DELETE FROM productos WHERE id_producto=%s", (id,))
+        cursor.execute("DELETE FROM producto WHERE id_producto=%s", (id,))
         conn.commit()
 
         conn.close()
     except Exception as e:
         print("Error:", e)
 
-    return redirect("/productos")
+    return redirect("/producto")
 
 
 # ================= CONTACTO =================
