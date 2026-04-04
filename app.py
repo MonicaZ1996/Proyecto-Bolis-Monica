@@ -192,7 +192,7 @@ def producto():
 
     return render_template("producto.html", producto=datos)
 
-# insertar producto
+# producto
 @app.route("/producto/crear", methods=["GET", "POST"])
 def crear_producto():
     if request.method == "POST":
