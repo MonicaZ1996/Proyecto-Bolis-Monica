@@ -20,9 +20,9 @@ def inicio():
 # ================= PRODUCTOS =================
 @app.route("/producto")
 def producto():
-    productos = db.connection.cursor()
-    productos.execute("SELECT * FROM productos")
-    datos = productos.fetchall()
+    producto = db.connection.cursor()
+    producto.execute("SELECT * FROM producto")
+    datos = producto.fetchall()
     return render_template("producto.html", producto=datos)
 
 
