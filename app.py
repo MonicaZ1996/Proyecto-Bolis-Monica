@@ -19,11 +19,23 @@ def inicio():
 
 # ================= PRODUCTOS =================
 @app.route("/producto")
-def producto():
-    producto = db.connection.cursor()
-    producto.execute("SELECT * FROM producto")
-    datos = producto.fetchall()
-    return render_template("producto.html", producto=datos)
+def listar_producto():
+    try:
+        conn = get_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("SELECT * FROM productos")
+        datos = cursor.fetchall()
+
+        conn.close()
+
+        print("DATOS:", datos)  # DEBUG
+
+        return render_template("producto.html", producto=datos)
+
+    except Exception as e:
+        print("ERROR EN PRODUCTO:", e)
+        return f"Error en servidor: {e}"
 
 
 # ================= CREAR =================
